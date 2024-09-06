@@ -21,11 +21,11 @@ pub struct TavilySearchParams {
     /// Please note that this feature is only available when using the "news" search topic.
     /// Default is 3.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub days: Option<i32>,
+    pub days: Option<u32>,
 
     /// The maximum number of search results to return. Default is 5.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub max_results: Option<i32>,
+    pub max_results: Option<u32>,
 
     /// Include a list of query-related images in the response. Default is false.
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -50,14 +50,14 @@ pub struct TavilySearchParams {
     pub exclude_domains: Option<Vec<String>>,
 }
 
-#[derive(Debug, serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Debug, serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "lowercase")]
 pub enum Topic {
     General,
     News,
 }
 
-#[derive(Debug, serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Debug, serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "lowercase")]
 pub enum SearchDepth {
     Basic,
@@ -68,7 +68,7 @@ pub enum SearchDepth {
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
 pub struct TavilySearchResponse {
     /// The answer to your search query.
-    pub answer: String,
+    pub answer: Option<String>,
 
     /// Your search query.
     pub query: String,
@@ -77,7 +77,7 @@ pub struct TavilySearchResponse {
     pub response_time: f64,
 
     /// A list of query related image urls.
-    pub images: Vec<String>,
+    pub images: Option<Vec<String>>,
 
     /// A list of sorted search results ranked by relevancy.
     pub results: Vec<TavilySearchResult>,
@@ -98,7 +98,7 @@ pub struct TavilySearchResult {
     pub content: String,
 
     /// The parsed and cleaned HTML of the site. For now includes parsed text only.
-    pub raw_content: String,
+    pub raw_content: Option<String>,
 
     /// The relevance score of the search result.
     pub score: f64,
