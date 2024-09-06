@@ -9,12 +9,12 @@ pub struct TavilySearchParams {
     /// The depth of the search. It can be "basic" or "advanced".
     /// Default is "basic" unless specified otherwise in a given method.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub search_depth: Option<String>,
+    pub search_depth: Option<SearchDepth>,
 
     /// The category of the search. This will determine which of our agents will be used for the search.
     /// Currently: only "general" and "news" are supported. Default is "general".
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub topic: Option<String>,
+    pub topic: Option<Topic>,
 
     /// The number of days back from the current date to include in the search results.
     /// This specifies the time frame of data to be retrieved.
@@ -48,6 +48,20 @@ pub struct TavilySearchParams {
     /// Default is [], which doesn't exclude any domains.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub exclude_domains: Option<Vec<String>>,
+}
+
+#[derive(Debug, serde::Serialize, serde::Deserialize)]
+#[serde(rename_all = "lowercase")]
+pub enum Topic {
+    General,
+    News,
+}
+
+#[derive(Debug, serde::Serialize, serde::Deserialize)]
+#[serde(rename_all = "lowercase")]
+pub enum SearchDepth {
+    Basic,
+    Advanced,
 }
 
 /// Represents the response from a Tavily search request.
