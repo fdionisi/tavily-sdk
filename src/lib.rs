@@ -1,5 +1,5 @@
-mod error;
-mod search;
+pub mod error;
+pub mod search;
 
 use anyhow::{anyhow, Result};
 use error::{HttpError, HttpErrorPayload, TavilyError};
