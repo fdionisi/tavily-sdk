@@ -10,8 +10,8 @@ keywords = ["tavily", "api", "sdk", "search"]
 categories = ["api-bindings"]
 
 [dependencies]
-anyhow = "1.0.86"
-reqwest = { version = "0.12.7", features = ["json"] }
+anyhow = "1.0.89"
+http-client = { git = "https://github.com/fdionisi/http-client", rev = "033ac96ab12ac3d13b78f9725b237380917c7094" }
 secrecy = "0.8.0"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = { version = "1.0" }
